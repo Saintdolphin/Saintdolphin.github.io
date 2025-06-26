@@ -1,11 +1,296 @@
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>我的个人网站</title>
-    </head>
-<body>
-<p>早上好</p>
-</body>
-    
 
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简约星系导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: 3px;
+            color: #5d8aa8;
+            text-shadow: 0 0 10px rgba(93, 138, 168, 0.7);
+        }
+
+        .solar-system {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+        }
+
+        .sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ffd700, #ff8c00);
+            border-radius: 50%;
+            box-shadow: 0 0 30px #ff8c00;
+            z-index: 5;
+        }
+
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .planet {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 10;
+        }
+
+        .planet:hover {
+            transform: translate(-50%, -50%) scale(1.5);
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        .planet-info {
+            position: absolute;
+            background: rgba(20, 20, 30, 0.9);
+            border: 1px solid rgba(100, 150, 255, 0.5);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 20;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .mercury { background-color: #a9a9a9; color: #a9a9a9; }
+        .venus { background-color: #e39e54; color: #e39e54; }
+        .earth { background-color: #6495ed; color: #6495ed; }
+        .mars { background-color: #cd5c5c; color: #cd5c5c; }
+        .jupiter { background-color: #d8a679; color: #d8a679; }
+        .saturn { background-color: #e3cda5; color: #e3cda5; }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #5d8aa8;
+            opacity: 0.7;
+        }
+
+        @keyframes orbit {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            .solar-system {
+                width: 350px;
+                height: 350px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <h1>星系导航系统</h1>
+        <div class="solar-system">
+            <!-- 太阳 -->
+            <div class="sun"></div>
+            
+            <!-- 行星轨道 -->
+            <div class="orbit" style="width: 120px; height: 120px;">
+                <a href="mercury.html" class="planet mercury" data-name="水星" data-desc="最靠近太阳的行星"></a>
+            </div>
+            
+            <div class="orbit" style="width: 180px; height: 180px;">
+                <a href="venus.html" class="planet venus" data-name="金星" data-desc="最明亮的行星"></a>
+            </div>
+            
+            <div class="orbit" style="width: 240px; height: 240px;">
+                <a href="earth.html" class="planet earth" data-name="地球" data-desc="我们的家园"></a>
+            </div>
+            
+            <div class="orbit" style="width: 300px; height: 300px;">
+                <a href="mars.html" class="planet mars" data-name="火星" data-desc="红色星球"></a>
+            </div>
+            
+            <div class="orbit" style="width: 380px; height: 380px;">
+                <a href="jupiter.html" class="planet jupiter" data-name="木星" data-desc="太阳系最大的行星"></a>
+            </div>
+            
+            <div class="orbit" style="width: 460px; height: 460px;">
+                <a href="saturn.html" class="planet saturn" data-name="土星" data-desc="拥有美丽光环"></a>
+            </div>
+        </div>
+        
+        <div class="planet-info" id="planetInfo"></div>
+        
+        <p class="footer">点击行星进入子页面 • 简约星系导航系统</p>
+    </div>
+
+    <script>
+        // 创建星空背景
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 200;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // 随机位置
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                
+                // 随机大小（0.5px - 2px）
+                const size = Math.random() * 1.5 + 0.5;
+                
+                // 随机透明度
+                const opacity = Math.random() * 0.8 + 0.2;
+                
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.opacity = opacity;
+                
+                // 随机动画
+                const duration = Math.random() * 10 + 5;
+                star.style.animation = `twinkle ${duration}s infinite alternate`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // 设置行星轨道动画
+        function setupOrbits() {
+            const orbits = document.querySelectorAll('.orbit');
+            const speeds = [20, 30, 40, 50, 70, 90]; // 不同轨道的旋转速度（秒）
+            
+            orbits.forEach((orbit, index) => {
+                // 设置动画
+                orbit.style.animation = `orbit ${speeds[index]}s linear infinite`;
+                
+                // 随机起始角度
+                const startAngle = Math.random() * 360;
+                orbit.style.transform = `translate(-50%, -50%) rotate(${startAngle}deg)`;
+                
+                // 获取行星
+                const planet = orbit.querySelector('.planet');
+                
+                // 鼠标悬停显示信息
+                planet.addEventListener('mouseenter', function(e) {
+                    const info = document.getElementById('planetInfo');
+                    info.textContent = `${this.dataset.name}: ${this.dataset.desc}`;
+                    info.style.display = 'block';
+                    info.style.opacity = 1;
+                    
+                    // 位置更新
+                    const updatePosition = () => {
+                        const rect = this.getBoundingClientRect();
+                        info.style.left = `${rect.left + rect.width/2}px`;
+                        info.style.top = `${rect.top - 40}px`;
+                    };
+                    
+                    updatePosition();
+                    this._updatePosition = updatePosition;
+                    
+                    // 添加事件监听器用于更新位置
+                    window.addEventListener('resize', updatePosition);
+                });
+                
+                planet.addEventListener('mouseleave', function() {
+                    const info = document.getElementById('planetInfo');
+                    info.style.opacity = 0;
+                    setTimeout(() => {
+                        info.style.display = 'none';
+                    }, 300);
+                    
+                    window.removeEventListener('resize', this._updatePosition);
+                });
+            });
+        }
+        
+        // 添加CSS关键帧
+        function addKeyframes() {
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes twinkle {
+                    0% { opacity: 0.2; }
+                    100% { opacity: 0.8; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            setupOrbits();
+            addKeyframes();
+        });
+    </script>
+</body>
 </html>
+
