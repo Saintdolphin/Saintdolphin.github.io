@@ -297,53 +297,7 @@
             });
         }
 
-        function setupOrbits() {
-            const orbits = document.querySelectorAll('.orbit.venus-orbit');
-            const speeds = [4]; // 不同轨道的旋转速度（秒）
-            
-            orbits.forEach((orbit, index) => {
-                // 设置动画
-                orbit.style.animation = `orbit ${speeds[index]}s linear infinite`;
-                
-                // 随机起始角度
-                const startAngle = Math.random() * 360;
-                orbit.style.transform = `translate(-50%, -50%) rotate(${startAngle}deg)`;
-                
-                // 获取行星
-                const planet = orbit.querySelector('.planet');
-                
-                // 鼠标悬停显示信息
-                planet.addEventListener('mouseenter', function(e) {
-                    const info = document.getElementById('planetInfo');
-                    info.textContent = `${this.dataset.name}: ${this.dataset.desc}`;
-                    info.style.display = 'block';
-                    info.style.opacity = 1;
-                    
-                    // 位置更新
-                    const updatePosition = () => {
-                        const rect = this.getBoundingClientRect();
-                        info.style.left = `${rect.left + rect.width/2}px`;
-                        info.style.top = `${rect.top - 40}px`;
-                    };
-                    
-                    updatePosition();
-                    this._updatePosition = updatePosition;
-                    
-                    // 添加事件监听器用于更新位置
-                    window.addEventListener('resize', updatePosition);
-                });
-                
-                planet.addEventListener('mouseleave', function() {
-                    const info = document.getElementById('planetInfo');
-                    info.style.opacity = 0;
-                    setTimeout(() => {
-                        info.style.display = 'none';
-                    }, 300);
-                    
-                    window.removeEventListener('resize', this._updatePosition);
-                });
-            });
-        }
+        
         
         // 添加CSS关键帧
         function addKeyframes() {
