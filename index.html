@@ -41,8 +41,8 @@
 
         .solar-system {
             position: relative;
-            width: 500px;
-            height: 500px;
+            width: 800px;
+            height: 800px;
             margin: 0 auto;
         }
 
@@ -76,8 +76,7 @@
             transform-origin: center center;
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 50%;
-            animation: orbit 30s linear infinite;  /* 比如 30s */
-            animation-direction: reverse;
+            animation: orbit-reserve 30s linear infinite;  /* 比如 30s */
         }
 
         .planet {
@@ -118,8 +117,8 @@
         .mars { background-color: #cd5c5c; color: #cd5c5c; }
         .jupiter { background-color: #d8a679; color: #d8a679; }
         .saturn { background-color: #e3cda5; color: #e3cda5; }
-        .Uranian { background-color: #a5d1e3; color: #a5d1e3; }
-        .Neptune { background-color: #38479c; color: #38479c; }
+        .uranian { background-color: #a5d1e3; color: #a5d1e3; }
+        .neptune { background-color: #38479c; color: #38479c; }
 
         .stars {
             position: fixed;
@@ -151,6 +150,10 @@
             to {
                 transform: translate(-50%, -50%) rotate(360deg);
              }
+        }
+        @keyframes orbit-reverse {
+            from { transform: translate(-50%, -50%) rotate(360deg); }
+            to   { transform: translate(-50%, -50%) rotate(0deg); }
         }
         @media (max-width: 600px) {
             .solar-system {
