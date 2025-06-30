@@ -68,6 +68,10 @@
             border-radius: 50%;
             animation: orbit 30s linear infinite;  /* 比如 30s */
         }
+        
+        .orbit.venus-orbit {
+            animation-direction: reverse;
+        }
 
         .planet {
             position: absolute;
@@ -108,8 +112,8 @@
         .mars { background-color: #cd5c5c; color: #cd5c5c; }
         .jupiter { background-color: #d8a679; color: #d8a679; }
         .saturn { background-color: #e3cda5; color: #e3cda5; }
-        .Uranian { background-color: #a5d1e3; color: #b0beeb; }
-        .Neptune { background-color: #38479c; color: #3250b3; }
+        .Uranian { background-color: #a5d1e3; color: #a5d1e3; }
+        .Neptune { background-color: #38479c; color: #38479c; }
 
         .stars {
             position: fixed;
@@ -165,19 +169,19 @@
             <div class="sun"></div>
             
             <!-- 行星轨道 -->
-            <div class="orbit" style="width: 40px; height: 40px;">
+            <div class="orbit" style="width: 80px; height: 80px;">
                 <a class="planet mercury" data-name="Mercury" ></a>
             </div>
             
-            <div class="orbit" style="width: 70px; height: 70px;">
+            <div class=".venus-orbit" style="width: 110px; height: 110px;">
                 <a  class="planet venus" data-name="Venus" ></a>
             </div>
             
-            <div class="orbit" style="width: 120px; height: 120px;">
+            <div class="orbit" style="width: 150px; height: 150px;">
                 <a  class="planet earth" data-name="Earth" ></a>
             </div>
             
-            <div class="orbit" style="width: 170px; height: 170px;">
+            <div class="orbit" style="width: 200px; height: 200px;">
                 <a  class="planet mars" data-name="Mars" ></a>
             </div>
             
@@ -240,7 +244,7 @@
         // 设置行星轨道动画
         function setupOrbits() {
             const orbits = document.querySelectorAll('.orbit');
-            const speeds = [1, -2, 3, 5, 8, 10, 15, 20]; // 不同轨道的旋转速度（秒）
+            const speeds = [2, 4, 6, 10, 16, 25, 40, 70]; // 不同轨道的旋转速度（秒）
             
             orbits.forEach((orbit, index) => {
                 // 设置动画
